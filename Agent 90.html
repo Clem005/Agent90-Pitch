@@ -1,0 +1,1966 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agent 90 - AI-Powered Personalised Learning Platform PoC</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .card-hover {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .card-hover:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        .section-transition {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease-out;
+        }
+        .section-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .nav-indicator {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            transition: all 0.3s ease;
+        }
+        .mockup-screen {
+            background: #f8fafc;
+            border: 8px solid #e2e8f0;
+            border-radius: 16px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+        .ai-animation {
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        .connection-line {
+            stroke: #667eea;
+            stroke-width: 2;
+            stroke-dasharray: 5,5;
+            animation: dash 2s linear infinite;
+        }
+        @keyframes dash {
+            to { stroke-dashoffset: -10; }
+        }
+        .prototype-modal {
+            backdrop-filter: blur(10px);
+            background: rgba(0, 0, 0, 0.5);
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full bg-white shadow-lg z-50">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center space-x-2">
+                    <div class="w-10 h-10 gradient-bg rounded-lg flex items-center justify-center">
+                        <i class="fas fa-brain text-white text-xl"></i>
+                    </div>
+                    <span class="font-bold text-xl text-gray-800">Agent 90 PoC</span>
+                </div>
+                <div class="hidden md:flex items-center space-x-6 relative">
+                    <a href="#overview" class="nav-link text-gray-600 hover:text-purple-600 transition-colors py-2 px-3">Overview</a>
+                    <a href="#architecture" class="nav-link text-gray-600 hover:text-purple-600 transition-colors py-2 px-3">Architecture</a>
+                    <a href="#ui-mockups" class="nav-link text-gray-600 hover:text-purple-600 transition-colors py-2 px-3">UI Mockups</a>
+                    <a href="#ux-walkthrough" class="nav-link text-gray-600 hover:text-purple-600 transition-colors py-2 px-3">UX Guide</a>
+                    <a href="#ai-demo" class="nav-link text-gray-600 hover:text-purple-600 transition-colors py-2 px-3">AI Demo</a>
+                    <a href="#tech-stack" class="nav-link text-gray-600 hover:text-purple-600 transition-colors py-2 px-3">Tech Stack</a>
+                    <button onclick="openPrototype()" class="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition-colors">
+                        <i class="fas fa-play mr-2"></i>Live Demo
+                    </button>
+                    <div class="nav-indicator"></div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Overview Section -->
+    <section id="overview" class="pt-24 pb-16 section-transition">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="text-center mb-16">
+                <h1 class="text-5xl font-bold gradient-bg bg-clip-text text-transparent mb-4">
+                    Agent 90 Learning Platform
+                </h1>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    AI-powered personalised learning that adapts to each student's unique learning style, pace, and preferences
+                </p>
+            </div>
+
+            <!-- Key Features Grid -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+                <div class="bg-white p-6 rounded-xl shadow-lg card-hover">
+                    <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-user-graduate text-blue-600 text-xl"></i>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">Personalized Learning</h3>
+                    <p class="text-gray-600">AI adapts content to individual learning styles and preferences</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-lg card-hover">
+                    <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-chart-line text-green-600 text-xl"></i>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">Real-time Analytics</h3>
+                    <p class="text-gray-600">Comprehensive insights into learning progress and performance</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-lg card-hover">
+                    <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-lightbulb text-purple-600 text-xl"></i>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">Adaptive Content</h3>
+                    <p class="text-gray-600">Dynamic content difficulty and format adjustment</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-lg card-hover">
+                    <div class="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-users text-orange-600 text-xl"></i>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">Multi-Role Support</h3>
+                    <p class="text-gray-600">Students, teachers, and administrators in one platform</p>
+                </div>
+            </div>
+
+            <!-- Core Workflow -->
+            <div class="bg-white rounded-2xl shadow-xl p-8">
+                <h2 class="text-3xl font-bold text-center mb-8">Core Learning Workflow</h2>
+                <div class="flex flex-wrap justify-center items-center space-x-4">
+                    <div class="flex-1 min-w-48 text-center mb-4">
+                        <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                            <i class="fas fa-clipboard-list text-blue-600 text-2xl"></i>
+                        </div>
+                        <h4 class="font-semibold mb-2">1. Assessment</h4>
+                        <p class="text-sm text-gray-600">Initial diagnostic to determine learning style</p>
+                    </div>
+                    <i class="fas fa-arrow-right text-gray-400 hidden lg:block"></i>
+                    <div class="flex-1 min-w-48 text-center mb-4">
+                        <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                            <i class="fas fa-cogs text-green-600 text-2xl"></i>
+                        </div>
+                        <h4 class="font-semibold mb-2">2. Personalization</h4>
+                        <p class="text-sm text-gray-600">AI creates custom learning path</p>
+                    </div>
+                    <i class="fas fa-arrow-right text-gray-400 hidden lg:block"></i>
+                    <div class="flex-1 min-w-48 text-center mb-4">
+                        <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                            <i class="fas fa-play-circle text-purple-600 text-2xl"></i>
+                        </div>
+                        <h4 class="font-semibold mb-2">3. Delivery</h4>
+                        <p class="text-sm text-gray-600">Adaptive content presentation</p>
+                    </div>
+                    <i class="fas fa-arrow-right text-gray-400 hidden lg:block"></i>
+                    <div class="flex-1 min-w-48 text-center mb-4">
+                        <div class="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                            <i class="fas fa-chart-bar text-orange-600 text-2xl"></i>
+                        </div>
+                        <h4 class="font-semibold mb-2">4. Analytics</h4>
+                        <p class="text-sm text-gray-600">Progress tracking and insights</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- System Architecture -->
+    <section id="architecture" class="py-16 bg-gray-100 section-transition">
+        <div class="max-w-6xl mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center mb-12">System Architecture</h2>
+            
+            <!-- Architecture Diagram -->
+            <div class="bg-white rounded-2xl shadow-xl p-8 mb-8">
+                <div class="relative">
+                    <svg viewBox="0 0 1000 600" class="w-full h-96">
+                        <!-- User Layer -->
+                        <rect x="50" y="50" width="120" height="80" rx="10" fill="#e3f2fd" stroke="#2196f3" stroke-width="2"/>
+                        <text x="110" y="75" text-anchor="middle" class="text-sm font-semibold">Student</text>
+                        <text x="110" y="95" text-anchor="middle" class="text-xs">Web/Mobile</text>
+                        <text x="110" y="110" text-anchor="middle" class="text-xs">Interface</text>
+
+                        <rect x="200" y="50" width="120" height="80" rx="10" fill="#e8f5e8" stroke="#4caf50" stroke-width="2"/>
+                        <text x="260" y="75" text-anchor="middle" class="text-sm font-semibold">Teacher</text>
+                        <text x="260" y="95" text-anchor="middle" class="text-xs">Dashboard</text>
+                        <text x="260" y="110" text-anchor="middle" class="text-xs">Interface</text>
+
+                        <rect x="350" y="50" width="120" height="80" rx="10" fill="#fff3e0" stroke="#ff9800" stroke-width="2"/>
+                        <text x="410" y="75" text-anchor="middle" class="text-sm font-semibold">Admin</text>
+                        <text x="410" y="95" text-anchor="middle" class="text-xs">Management</text>
+                        <text x="410" y="110" text-anchor="middle" class="text-xs">Interface</text>
+
+                        <!-- Frontend Layer -->
+                        <rect x="150" y="180" width="200" height="60" rx="10" fill="#f3e5f5" stroke="#9c27b0" stroke-width="2"/>
+                        <text x="250" y="205" text-anchor="middle" class="text-sm font-semibold">Frontend Layer</text>
+                        <text x="250" y="220" text-anchor="middle" class="text-xs">React.js + Tailwind CSS</text>
+
+                        <!-- API Gateway -->
+                        <rect x="150" y="280" width="200" height="60" rx="10" fill="#e1f5fe" stroke="#00bcd4" stroke-width="2"/>
+                        <text x="250" y="305" text-anchor="middle" class="text-sm font-semibold">API Gateway</text>
+                        <text x="250" y="320" text-anchor="middle" class="text-xs">Authentication & Routing</text>
+
+                        <!-- Core Services -->
+                        <rect x="50" y="380" width="120" height="80" rx="10" fill="#fce4ec" stroke="#e91e63" stroke-width="2"/>
+                        <text x="110" y="405" text-anchor="middle" class="text-sm font-semibold">Diagnostic</text>
+                        <text x="110" y="420" text-anchor="middle" class="text-xs">Assessment</text>
+                        <text x="110" y="435" text-anchor="middle" class="text-xs">Service</text>
+
+                        <rect x="200" y="380" width="120" height="80" rx="10" fill="#f3e5f5" stroke="#9c27b0" stroke-width="2"/>
+                        <text x="260" y="400" text-anchor="middle" class="text-sm font-semibold">AI Engine</text>
+                        <text x="260" y="415" text-anchor="middle" class="text-xs">Personalization</text>
+                        <text x="260" y="430" text-anchor="middle" class="text-xs">& Adaptation</text>
+
+                        <rect x="350" y="380" width="120" height="80" rx="10" fill="#e8f5e8" stroke="#4caf50" stroke-width="2"/>
+                        <text x="410" y="405" text-anchor="middle" class="text-sm font-semibold">Content</text>
+                        <text x="410" y="420" text-anchor="middle" class="text-xs">Management</text>
+                        <text x="410" y="435" text-anchor="middle" class="text-xs">Service</text>
+
+                        <!-- Database Layer -->
+                        <rect x="150" y="500" width="200" height="60" rx="10" fill="#fff3e0" stroke="#ff9800" stroke-width="2"/>
+                        <text x="250" y="525" text-anchor="middle" class="text-sm font-semibold">Database Layer</text>
+                        <text x="250" y="540" text-anchor="middle" class="text-xs">User Data, Content, Analytics</text>
+
+                        <!-- Third Party Services -->
+                        <rect x="550" y="200" width="120" height="60" rx="10" fill="#e3f2fd" stroke="#2196f3" stroke-width="2"/>
+                        <text x="610" y="225" text-anchor="middle" class="text-sm font-semibold">OpenAI API</text>
+                        <text x="610" y="240" text-anchor="middle" class="text-xs">Content Gen</text>
+
+                        <rect x="550" y="280" width="120" height="60" rx="10" fill="#e8f5e8" stroke="#4caf50" stroke-width="2"/>
+                        <text x="610" y="305" text-anchor="middle" class="text-sm font-semibold">Firebase</text>
+                        <text x="610" y="320" text-anchor="middle" class="text-xs">Auth & Storage</text>
+
+                        <rect x="550" y="360" width="120" height="60" rx="10" fill="#fff3e0" stroke="#ff9800" stroke-width="2"/>
+                        <text x="610" y="385" text-anchor="middle" class="text-sm font-semibold">Analytics</text>
+                        <text x="610" y="400" text-anchor="middle" class="text-xs">Power BI</text>
+
+                        <!-- Connection Lines -->
+                        <line x1="110" y1="130" x2="250" y2="180" class="connection-line"/>
+                        <line x1="260" y1="130" x2="250" y2="180" class="connection-line"/>
+                        <line x1="410" y1="130" x2="250" y2="180" class="connection-line"/>
+                        <line x1="250" y1="240" x2="250" y2="280" class="connection-line"/>
+                        <line x1="250" y1="340" x2="110" y2="380" class="connection-line"/>
+                        <line x1="250" y1="340" x2="260" y2="380" class="connection-line"/>
+                        <line x1="250" y1="340" x2="410" y2="380" class="connection-line"/>
+                        <line x1="250" y1="460" x2="250" y2="500" class="connection-line"/>
+                        <line x1="350" y1="310" x2="550" y2="230" class="connection-line"/>
+                        <line x1="350" y1="310" x2="550" y2="310" class="connection-line"/>
+                        <line x1="350" y1="310" x2="550" y2="390" class="connection-line"/>
+                    </svg>
+                </div>
+            </div>
+
+            <!-- Data Flow Description -->
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="bg-white rounded-xl shadow-lg p-6">
+                    <h4 class="font-bold text-lg mb-4 flex items-center">
+                        <i class="fas fa-exchange-alt text-blue-600 mr-2"></i>
+                        Data Flow
+                    </h4>
+                    <ul class="space-y-3 text-sm">
+                        <li class="flex items-start">
+                            <span class="bg-blue-100 text-blue-600 rounded-full w-6 h-6 flex items-center justify-center text-xs mr-3 mt-0.5">1</span>
+                            User authentication via Firebase Auth
+                        </li>
+                        <li class="flex items-start">
+                            <span class="bg-blue-100 text-blue-600 rounded-full w-6 h-6 flex items-center justify-center text-xs mr-3 mt-0.5">2</span>
+                            Diagnostic assessment data to AI Engine
+                        </li>
+                        <li class="flex items-start">
+                            <span class="bg-blue-100 text-blue-600 rounded-full w-6 h-6 flex items-center justify-center text-xs mr-3 mt-0.5">3</span>
+                            Personalized content generation via OpenAI
+                        </li>
+                        <li class="flex items-start">
+                            <span class="bg-blue-100 text-blue-600 rounded-full w-6 h-6 flex items-center justify-center text-xs mr-3 mt-0.5">4</span>
+                            Real-time analytics to Power BI dashboard
+                        </li>
+                    </ul>
+                </div>
+                <div class="bg-white rounded-xl shadow-lg p-6">
+                    <h4 class="font-bold text-lg mb-4 flex items-center">
+                        <i class="fas fa-shield-alt text-green-600 mr-2"></i>
+                        Security & Scalability
+                    </h4>
+                    <ul class="space-y-3 text-sm">
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-green-600 mr-3 mt-1"></i>
+                            JWT-based authentication
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-green-600 mr-3 mt-1"></i>
+                            Role-based access control (RBAC)
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-green-600 mr-3 mt-1"></i>
+                            Auto-scaling cloud infrastructure
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-green-600 mr-3 mt-1"></i>
+                            Encrypted data storage and transmission
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- UI Mockups -->
+    <section id="ui-mockups" class="py-16 section-transition">
+        <div class="max-w-6xl mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center mb-12">UI/UX Mockups</h2>
+            
+            <!-- Mockup Navigation -->
+            <div class="flex flex-wrap justify-center mb-8 space-x-2">
+                <button onclick="showMockup('onboarding')" class="mockup-tab bg-purple-600 text-white px-4 py-2 rounded-lg mb-2">
+                    Student Onboarding
+                </button>
+                <button onclick="showMockup('dashboard')" class="mockup-tab bg-gray-300 text-gray-700 px-4 py-2 rounded-lg mb-2">
+                    Learning Dashboard
+                </button>
+                <button onclick="showMockup('lesson')" class="mockup-tab bg-gray-300 text-gray-700 px-4 py-2 rounded-lg mb-2">
+                    Lesson Page
+                </button>
+                <button onclick="showMockup('quiz')" class="mockup-tab bg-gray-300 text-gray-700 px-4 py-2 rounded-lg mb-2">
+                    Adaptive Quiz
+                </button>
+                <button onclick="showMockup('teacher')" class="mockup-tab bg-gray-300 text-gray-700 px-4 py-2 rounded-lg mb-2">
+                    Teacher Dashboard
+                </button>
+            </div>
+
+            <!-- Mockup Container -->
+            <div class="mockup-screen mx-auto max-w-4xl">
+                <!-- Student Onboarding Mockup -->
+                <div id="mockup-onboarding" class="mockup-content p-8">
+                    <div class="text-center mb-8">
+                        <div class="w-16 h-16 gradient-bg rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-user-plus text-white text-2xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-2">Welcome to Agent 90!</h3>
+                        <p class="text-gray-600">Let's personalize your learning experience</p>
+                    </div>
+
+                    <div class="max-w-2xl mx-auto">
+                        <!-- Progress Steps -->
+                        <div class="flex justify-between mb-8">
+                            <div class="flex flex-col items-center">
+                                <div class="w-8 h-8 bg-purple-600 text-white rounded-full flex items-center justify-center text-sm mb-2">1</div>
+                                <span class="text-xs text-purple-600 font-semibold">Profile</span>
+                            </div>
+                            <div class="flex flex-col items-center">
+                                <div class="w-8 h-8 bg-gray-300 text-gray-600 rounded-full flex items-center justify-center text-sm mb-2">2</div>
+                                <span class="text-xs text-gray-500">Assessment</span>
+                            </div>
+                            <div class="flex flex-col items-center">
+                                <div class="w-8 h-8 bg-gray-300 text-gray-600 rounded-full flex items-center justify-center text-sm mb-2">3</div>
+                                <span class="text-xs text-gray-500">Preferences</span>
+                            </div>
+                        </div>
+
+                        <!-- Form Fields -->
+                        <div class="space-y-6">
+                            <div>
+                                <label class="block text-sm font-semibold mb-2">Full Name</label>
+                                <input type="text" placeholder="Enter your full name" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600">
+                            </div>
+                            <div class="grid md:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm font-semibold mb-2">Grade Level</label>
+                                    <select class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600">
+                                        <option>Select Grade</option>
+                                        <option>Grade 9</option>
+                                        <option>Grade 10</option>
+                                        <option>Grade 11</option>
+                                        <option>Grade 12</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-semibold mb-2">Subject Interest</label>
+                                    <select class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600">
+                                        <option>Mathematics</option>
+                                        <option>Science</option>
+                                        <option>Literature</option>
+                                        <option>History</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="text-center pt-4">
+                                <button class="bg-purple-600 text-white px-8 py-3 rounded-lg hover:bg-purple-700 transition-colors font-semibold">
+                                    Continue to Assessment
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Learning Dashboard Mockup -->
+                <div id="mockup-dashboard" class="mockup-content p-8 hidden">
+                    <div class="flex justify-between items-center mb-8">
+                        <div>
+                            <h3 class="text-2xl font-bold">Good morning, Alex!</h3>
+                            <p class="text-gray-600">Ready to continue your learning journey?</p>
+                        </div>
+                        <div class="text-right">
+                            <div class="text-sm text-gray-600">Learning Streak</div>
+                            <div class="text-2xl font-bold text-purple-600">7 days</div>
+                        </div>
+                    </div>
+
+                    <!-- Progress Overview -->
+                    <div class="grid md:grid-cols-3 gap-6 mb-8">
+                        <div class="bg-blue-50 p-6 rounded-xl">
+                            <div class="flex items-center justify-between mb-4">
+                                <h4 class="font-semibold">Courses Completed</h4>
+                                <i class="fas fa-graduation-cap text-blue-600"></i>
+                            </div>
+                            <div class="text-3xl font-bold text-blue-600">12</div>
+                            <div class="text-sm text-gray-600">+2 this week</div>
+                        </div>
+                        <div class="bg-green-50 p-6 rounded-xl">
+                            <div class="flex items-center justify-between mb-4">
+                                <h4 class="font-semibold">Study Time</h4>
+                                <i class="fas fa-clock text-green-600"></i>
+                            </div>
+                            <div class="text-3xl font-bold text-green-600">24h</div>
+                            <div class="text-sm text-gray-600">This month</div>
+                        </div>
+                        <div class="bg-purple-50 p-6 rounded-xl">
+                            <div class="flex items-center justify-between mb-4">
+                                <h4 class="font-semibold">Performance</h4>
+                                <i class="fas fa-chart-line text-purple-600"></i>
+                            </div>
+                            <div class="text-3xl font-bold text-purple-600">92%</div>
+                            <div class="text-sm text-gray-600">Average score</div>
+                        </div>
+                    </div>
+
+                    <!-- Current Lessons -->
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div class="bg-white p-6 rounded-xl shadow-lg">
+                            <h4 class="font-bold text-lg mb-4">Continue Learning</h4>
+                            <div class="space-y-4">
+                                <div class="flex items-center p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors cursor-pointer">
+                                    <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mr-4">
+                                        <i class="fas fa-calculator text-blue-600"></i>
+                                    </div>
+                                    <div class="flex-1">
+                                        <h5 class="font-semibold">Algebra Fundamentals</h5>
+                                        <p class="text-sm text-gray-600">Chapter 3: Linear Equations</p>
+                                        <div class="w-full bg-gray-200 rounded-full h-2 mt-2">
+                                            <div class="bg-blue-600 h-2 rounded-full" style="width: 65%"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flex items-center p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors cursor-pointer">
+                                    <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mr-4">
+                                        <i class="fas fa-atom text-green-600"></i>
+                                    </div>
+                                    <div class="flex-1">
+                                        <h5 class="font-semibold">Chemistry Basics</h5>
+                                        <p class="text-sm text-gray-600">Lesson 5: Chemical Bonds</p>
+                                        <div class="w-full bg-gray-200 rounded-full h-2 mt-2">
+                                            <div class="bg-green-600 h-2 rounded-full" style="width: 40%"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-white p-6 rounded-xl shadow-lg">
+                            <h4 class="font-bold text-lg mb-4">Recommended for You</h4>
+                            <div class="space-y-4">
+                                <div class="p-4 border-2 border-dashed border-purple-300 rounded-lg">
+                                    <div class="flex items-center mb-2">
+                                        <i class="fas fa-brain text-purple-600 mr-2"></i>
+                                        <span class="text-sm font-semibold text-purple-600">AI Recommended</span>
+                                    </div>
+                                    <h5 class="font-semibold mb-1">Geometry Foundations</h5>
+                                    <p class="text-sm text-gray-600 mb-3">Based on your algebra progress</p>
+                                    <button class="w-full bg-purple-600 text-white py-2 rounded-lg hover:bg-purple-700 transition-colors">
+                                        Start Learning
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lesson Page Mockup -->
+                <div id="mockup-lesson" class="mockup-content p-8 hidden">
+                    <div class="flex justify-between items-center mb-6">
+                        <div class="flex items-center">
+                            <button class="mr-4 p-2 hover:bg-gray-100 rounded-full">
+                                <i class="fas fa-arrow-left"></i>
+                            </button>
+                            <div>
+                                <h3 class="text-xl font-bold">Linear Equations</h3>
+                                <p class="text-gray-600">Algebra Fundamentals • Chapter 3</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-4">
+                            <div class="text-sm">
+                                <span class="text-gray-600">Progress:</span>
+                                <span class="font-semibold">3 of 8</span>
+                            </div>
+                            <div class="w-32 bg-gray-200 rounded-full h-2">
+                                <div class="bg-blue-600 h-2 rounded-full" style="width: 37.5%"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Learning Format Selector -->
+                    <div class="bg-blue-50 p-4 rounded-lg mb-6">
+                        <div class="flex items-center mb-3">
+                            <i class="fas fa-magic text-blue-600 mr-2"></i>
+                            <span class="font-semibold text-blue-900">AI has detected you prefer visual learning</span>
+                        </div>
+                        <div class="flex space-x-4">
+                            <button class="flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg">
+                                <i class="fas fa-eye mr-2"></i>Visual
+                            </button>
+                            <button class="flex items-center px-4 py-2 bg-white text-gray-700 rounded-lg border">
+                                <i class="fas fa-volume-up mr-2"></i>Audio
+                            </button>
+                            <button class="flex items-center px-4 py-2 bg-white text-gray-700 rounded-lg border">
+                                <i class="fas fa-book mr-2"></i>Text
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Lesson Content -->
+                    <div class="bg-white rounded-xl shadow-lg p-6 mb-6">
+                        <h4 class="text-lg font-bold mb-4">Understanding Linear Equations</h4>
+                        
+                        <!-- Visual Content -->
+                        <div class="mb-6">
+                            <div class="bg-gray-100 h-48 rounded-lg flex items-center justify-center mb-4">
+                                <div class="text-center">
+                                    <i class="fas fa-chart-line text-4xl text-blue-600 mb-2"></i>
+                                    <p class="text-gray-600">Interactive Graph: y = 2x + 3</p>
+                                </div>
+                            </div>
+                            <p class="text-gray-700">
+                                A linear equation creates a straight line when graphed. The equation y = 2x + 3 shows:
+                            </p>
+                            <ul class="list-disc list-inside mt-2 space-y-1 text-gray-700">
+                                <li><strong>Slope (2):</strong> The line rises 2 units for every 1 unit right</li>
+                                <li><strong>Y-intercept (3):</strong> The line crosses the y-axis at point (0,3)</li>
+                            </ul>
+                        </div>
+
+                        <div class="flex justify-between">
+                            <button class="px-6 py-2 bg-gray-300 text-gray-700 rounded-lg hover:bg-gray-400 transition-colors">
+                                Previous
+                            </button>
+                            <button class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+                                Next: Practice Problems
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Adaptive Quiz Mockup -->
+                <div id="mockup-quiz" class="mockup-content p-8 hidden">
+                    <div class="text-center mb-6">
+                        <h3 class="text-2xl font-bold mb-2">Practice Quiz</h3>
+                        <p class="text-gray-600">Linear Equations • Adaptive Difficulty</p>
+                        <div class="flex justify-center items-center mt-4 space-x-4">
+                            <div class="text-sm text-gray-600">Question 3 of 10</div>
+                            <div class="w-48 bg-gray-200 rounded-full h-2">
+                                <div class="bg-green-600 h-2 rounded-full" style="width: 30%"></div>
+                            </div>
+                            <div class="text-sm font-semibold text-green-600">85% Accuracy</div>
+                        </div>
+                    </div>
+
+                    <!-- AI Adaptation Notice -->
+                    <div class="bg-green-50 border border-green-200 p-4 rounded-lg mb-6">
+                        <div class="flex items-center">
+                            <i class="fas fa-robot text-green-600 mr-2"></i>
+                            <span class="text-green-800 font-medium">AI Adaptation: Great work! Increasing difficulty level</span>
+                        </div>
+                    </div>
+
+                    <!-- Question -->
+                    <div class="bg-white rounded-xl shadow-lg p-6 mb-6">
+                        <div class="mb-6">
+                            <h4 class="font-bold text-lg mb-4">Question 3</h4>
+                            <p class="text-gray-800 mb-4">
+                                A line passes through points (2, 7) and (5, 13). What is the equation of this line in slope-intercept form?
+                            </p>
+                            
+                            <!-- Answer Options -->
+                            <div class="space-y-3">
+                                <label class="flex items-center p-4 bg-gray-50 rounded-lg hover:bg-blue-50 cursor-pointer transition-colors">
+                                    <input type="radio" name="answer" class="mr-3">
+                                    <span>y = 2x + 3</span>
+                                </label>
+                                <label class="flex items-center p-4 bg-gray-50 rounded-lg hover:bg-blue-50 cursor-pointer transition-colors">
+                                    <input type="radio" name="answer" class="mr-3">
+                                    <span>y = 3x + 1</span>
+                                </label>
+                                <label class="flex items-center p-4 bg-gray-50 rounded-lg hover:bg-blue-50 cursor-pointer transition-colors">
+                                    <input type="radio" name="answer" class="mr-3">
+                                    <span>y = 2x + 3</span>
+                                </label>
+                                <label class="flex items-center p-4 bg-gray-50 rounded-lg hover:bg-blue-50 cursor-pointer transition-colors">
+                                    <input type="radio" name="answer" class="mr-3">
+                                    <span>y = x + 5</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="flex justify-between items-center">
+                            <div class="text-sm text-gray-600">
+                                <i class="fas fa-clock mr-1"></i>
+                                Time remaining: 2:45
+                            </div>
+                            <div class="space-x-3">
+                                <button class="px-4 py-2 bg-gray-300 text-gray-700 rounded-lg hover:bg-gray-400 transition-colors">
+                                    Skip
+                                </button>
+                                <button class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+                                    Submit Answer
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Teacher Dashboard Mockup -->
+                <div id="mockup-teacher" class="mockup-content p-8 hidden">
+                    <div class="flex justify-between items-center mb-8">
+                        <div>
+                            <h3 class="text-2xl font-bold">Teacher Dashboard</h3>
+                            <p class="text-gray-600">Class: Grade 10 Mathematics • 28 Students</p>
+                        </div>
+                        <div class="flex space-x-3">
+                            <button class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+                                <i class="fas fa-plus mr-2"></i>Add Assignment
+                            </button>
+                            <button class="px-4 py-2 bg-gray-300 text-gray-700 rounded-lg hover:bg-gray-400 transition-colors">
+                                Export Report
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Overview Cards -->
+                    <div class="grid md:grid-cols-4 gap-6 mb-8">
+                        <div class="bg-white p-6 rounded-xl shadow-lg">
+                            <div class="flex items-center justify-between mb-4">
+                                <h4 class="font-semibold text-gray-600">Active Students</h4>
+                                <i class="fas fa-users text-blue-600"></i>
+                            </div>
+                            <div class="text-2xl font-bold">24</div>
+                            <div class="text-sm text-green-600">+2 this week</div>
+                        </div>
+                        <div class="bg-white p-6 rounded-xl shadow-lg">
+                            <div class="flex items-center justify-between mb-4">
+                                <h4 class="font-semibold text-gray-600">Avg. Performance</h4>
+                                <i class="fas fa-chart-bar text-green-600"></i>
+                            </div>
+                            <div class="text-2xl font-bold">87%</div>
+                            <div class="text-sm text-green-600">+3% improvement</div>
+                        </div>
+                        <div class="bg-white p-6 rounded-xl shadow-lg">
+                            <div class="flex items-center justify-between mb-4">
+                                <h4 class="font-semibold text-gray-600">Completion Rate</h4>
+                                <i class="fas fa-tasks text-purple-600"></i>
+                            </div>
+                            <div class="text-2xl font-bold">94%</div>
+                            <div class="text-sm text-gray-600">Assignments</div>
+                        </div>
+                        <div class="bg-white p-6 rounded-xl shadow-lg">
+                            <div class="flex items-center justify-between mb-4">
+                                <h4 class="font-semibold text-gray-600">At-Risk Students</h4>
+                                <i class="fas fa-exclamation-triangle text-orange-600"></i>
+                            </div>
+                            <div class="text-2xl font-bold">3</div>
+                            <div class="text-sm text-orange-600">Need attention</div>
+                        </div>
+                    </div>
+
+                    <!-- Student Performance Table -->
+                    <div class="bg-white rounded-xl shadow-lg p-6">
+                        <h4 class="font-bold text-lg mb-4">Student Performance Overview</h4>
+                        <div class="overflow-x-auto">
+                            <table class="w-full">
+                                <thead>
+                                    <tr class="border-b border-gray-200">
+                                        <th class="text-left py-3 px-4">Student</th>
+                                        <th class="text-left py-3 px-4">Progress</th>
+                                        <th class="text-left py-3 px-4">Last Activity</th>
+                                        <th class="text-left py-3 px-4">Performance</th>
+                                        <th class="text-left py-3 px-4">Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="border-b border-gray-100">
+                                        <td class="py-3 px-4">
+                                            <div class="flex items-center">
+                                                <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center mr-3">
+                                                    <span class="text-sm font-semibold text-blue-600">AJ</span>
+                                                </div>
+                                                <span class="font-medium">Alex Johnson</span>
+                                            </div>
+                                        </td>
+                                        <td class="py-3 px-4">
+                                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                                <div class="bg-green-600 h-2 rounded-full" style="width: 85%"></div>
+                                            </div>
+                                            <span class="text-xs text-gray-600">85%</span>
+                                        </td>
+                                        <td class="py-3 px-4 text-gray-600">2 hours ago</td>
+                                        <td class="py-3 px-4">
+                                            <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm">92%</span>
+                                        </td>
+                                        <td class="py-3 px-4">
+                                            <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm">On Track</span>
+                                        </td>
+                                    </tr>
+                                    <tr class="border-b border-gray-100">
+                                        <td class="py-3 px-4">
+                                            <div class="flex items-center">
+                                                <div class="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center mr-3">
+                                                    <span class="text-sm font-semibold text-purple-600">SM</span>
+                                                </div>
+                                                <span class="font-medium">Sarah Miller</span>
+                                            </div>
+                                        </td>
+                                        <td class="py-3 px-4">
+                                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                                <div class="bg-blue-600 h-2 rounded-full" style="width: 70%"></div>
+                                            </div>
+                                            <span class="text-xs text-gray-600">70%</span>
+                                        </td>
+                                        <td class="py-3 px-4 text-gray-600">1 day ago</td>
+                                        <td class="py-3 px-4">
+                                            <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">88%</span>
+                                        </td>
+                                        <td class="py-3 px-4">
+                                            <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Good</span>
+                                        </td>
+                                    </tr>
+                                    <tr class="border-b border-gray-100">
+                                        <td class="py-3 px-4">
+                                            <div class="flex items-center">
+                                                <div class="w-8 h-8 bg-orange-100 rounded-full flex items-center justify-center mr-3">
+                                                    <span class="text-sm font-semibold text-orange-600">MT</span>
+                                                </div>
+                                                <span class="font-medium">Mike Torres</span>
+                                            </div>
+                                        </td>
+                                        <td class="py-3 px-4">
+                                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                                <div class="bg-orange-600 h-2 rounded-full" style="width: 45%"></div>
+                                            </div>
+                                            <span class="text-xs text-gray-600">45%</span>
+                                        </td>
+                                        <td class="py-3 px-4 text-gray-600">3 days ago</td>
+                                        <td class="py-3 px-4">
+                                            <span class="bg-orange-100 text-orange-800 px-3 py-1 rounded-full text-sm">72%</span>
+                                        </td>
+                                        <td class="py-3 px-4">
+                                            <span class="bg-orange-100 text-orange-800 px-3 py-1 rounded-full text-sm">At Risk</span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- UX Walkthrough -->
+    <section id="ux-walkthrough" class="py-16 bg-gray-100 section-transition">
+        <div class="max-w-6xl mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center mb-12">UX Walkthrough</h2>
+            
+            <!-- Step-by-Step Guide -->
+            <div class="space-y-12">
+                <!-- Step 1 -->
+                <div class="flex flex-col lg:flex-row items-center bg-white rounded-2xl shadow-xl p-8">
+                    <div class="lg:w-1/2 lg:pr-8 mb-6 lg:mb-0">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mr-4">
+                                <span class="text-xl font-bold text-blue-600">1</span>
+                            </div>
+                            <h3 class="text-2xl font-bold">User Registration & Role Selection</h3>
+                        </div>
+                        <p class="text-gray-600 mb-4">
+                            New users start by creating an account and selecting their role (Student, Teacher, or Admin). 
+                            The system captures basic profile information and learning preferences.
+                        </p>
+                        <ul class="text-sm text-gray-600 space-y-2">
+                            <li class="flex items-center"><i class="fas fa-check text-green-600 mr-2"></i>Email verification</li>
+                            <li class="flex items-center"><i class="fas fa-check text-green-600 mr-2"></i>Role-based onboarding</li>
+                            <li class="flex items-center"><i class="fas fa-check text-green-600 mr-2"></i>Initial preference setting</li>
+                        </ul>
+                    </div>
+                    <div class="lg:w-1/2">
+                        <div class="bg-gray-100 h-64 rounded-lg flex items-center justify-center">
+                            <div class="text-center">
+                                <i class="fas fa-user-plus text-4xl text-blue-600 mb-2"></i>
+                                <p class="font-semibold">Registration Flow</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="flex flex-col lg:flex-row-reverse items-center bg-white rounded-2xl shadow-xl p-8">
+                    <div class="lg:w-1/2 lg:pl-8 mb-6 lg:mb-0">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mr-4">
+                                <span class="text-xl font-bold text-green-600">2</span>
+                            </div>
+                            <h3 class="text-2xl font-bold">Diagnostic Assessment</h3>
+                        </div>
+                        <p class="text-gray-600 mb-4">
+                            Students complete an initial assessment that evaluates their learning style, subject knowledge, 
+                            and preferences. AI analyzes responses to create a personalized learning profile.
+                        </p>
+                        <ul class="text-sm text-gray-600 space-y-2">
+                            <li class="flex items-center"><i class="fas fa-check text-green-600 mr-2"></i>Learning style detection</li>
+                            <li class="flex items-center"><i class="fas fa-check text-green-600 mr-2"></i>Knowledge gap analysis</li>
+                            <li class="flex items-center"><i class="fas fa-check text-green-600 mr-2"></i>Difficulty level calibration</li>
+                        </ul>
+                    </div>
+                    <div class="lg:w-1/2">
+                        <div class="bg-gray-100 h-64 rounded-lg flex items-center justify-center">
+                            <div class="text-center">
+                                <i class="fas fa-clipboard-list text-4xl text-green-600 mb-2"></i>
+                                <p class="font-semibold">Assessment Process</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="flex flex-col lg:flex-row items-center bg-white rounded-2xl shadow-xl p-8">
+                    <div class="lg:w-1/2 lg:pr-8 mb-6 lg:mb-0">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mr-4">
+                                <span class="text-xl font-bold text-purple-600">3</span>
+                            </div>
+                            <h3 class="text-2xl font-bold">Personalized Content Delivery</h3>
+                        </div>
+                        <p class="text-gray-600 mb-4">
+                            Based on the assessment results, AI generates and delivers customized learning content. 
+                            Students can switch between visual, audio, and text formats as needed.
+                        </p>
+                        <ul class="text-sm text-gray-600 space-y-2">
+                            <li class="flex items-center"><i class="fas fa-check text-green-600 mr-2"></i>Multi-format content</li>
+                            <li class="flex items-center"><i class="fas fa-check text-green-600 mr-2"></i>Adaptive pacing</li>
+                            <li class="flex items-center"><i class="fas fa-check text-green-600 mr-2"></i>Real-time adjustments</li>
+                        </ul>
+                    </div>
+                    <div class="lg:w-1/2">
+                        <div class="bg-gray-100 h-64 rounded-lg flex items-center justify-center">
+                            <div class="text-center">
+                                <i class="fas fa-play-circle text-4xl text-purple-600 mb-2"></i>
+                                <p class="font-semibold">Content Delivery</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 4 -->
+                <div class="flex flex-col lg:flex-row-reverse items-center bg-white rounded-2xl shadow-xl p-8">
+                    <div class="lg:w-1/2 lg:pl-8 mb-6 lg:mb-0">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center mr-4">
+                                <span class="text-xl font-bold text-orange-600">4</span>
+                            </div>
+                            <h3 class="text-2xl font-bold">Progress Tracking & Analytics</h3>
+                        </div>
+                        <p class="text-gray-600 mb-4">
+                            Continuous monitoring of student progress with detailed analytics for both students and teachers. 
+                            AI provides insights and recommendations for improvement.
+                        </p>
+                        <ul class="text-sm text-gray-600 space-y-2">
+                            <li class="flex items-center"><i class="fas fa-check text-green-600 mr-2"></i>Real-time progress tracking</li>
+                            <li class="flex items-center"><i class="fas fa-check text-green-600 mr-2"></i>Performance analytics</li>
+                            <li class="flex items-center"><i class="fas fa-check text-green-600 mr-2"></i>Intervention recommendations</li>
+                        </ul>
+                    </div>
+                    <div class="lg:w-1/2">
+                        <div class="bg-gray-100 h-64 rounded-lg flex items-center justify-center">
+                            <div class="text-center">
+                                <i class="fas fa-chart-bar text-4xl text-orange-600 mb-2"></i>
+                                <p class="font-semibold">Analytics Dashboard</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI Demo -->
+    <section id="ai-demo" class="py-16 section-transition">
+        <div class="max-w-6xl mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center mb-12">AI Functionality Demonstration</h2>
+            
+            <!-- Demo Controls -->
+            <div class="text-center mb-8">
+                <div class="inline-flex bg-gray-200 rounded-lg p-1">
+                    <button onclick="showDemo('learning-style')" class="demo-tab px-6 py-2 bg-purple-600 text-white rounded-lg">
+                        Learning Style Detection
+                    </button>
+                    <button onclick="showDemo('content-adaptation')" class="demo-tab px-6 py-2 text-gray-700">
+                        Content Adaptation
+                    </button>
+                    <button onclick="showDemo('difficulty-adjustment')" class="demo-tab px-6 py-2 text-gray-700">
+                        Difficulty Adjustment
+                    </button>
+                </div>
+            </div>
+
+            <!-- Learning Style Detection Demo -->
+            <div id="demo-learning-style" class="demo-content bg-white rounded-2xl shadow-xl p-8">
+                <h3 class="text-2xl font-bold text-center mb-8">AI Learning Style Detection</h3>
+                
+                <div class="grid lg:grid-cols-2 gap-8">
+                    <div>
+                        <h4 class="font-bold text-lg mb-4">Sample Assessment Questions</h4>
+                        <div class="space-y-4">
+                            <div class="p-4 bg-gray-50 rounded-lg">
+                                <p class="font-medium mb-2">Q: When learning a new concept, you prefer to:</p>
+                                <div class="space-y-2 text-sm">
+                                    <label class="flex items-center">
+                                        <input type="radio" name="q1" class="mr-2">
+                                        <span>See diagrams and visual examples</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="radio" name="q1" class="mr-2" checked>
+                                        <span>Listen to explanations and discussions</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="radio" name="q1" class="mr-2">
+                                        <span>Read detailed text and take notes</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="radio" name="q1" class="mr-2">
+                                        <span>Practice hands-on activities</span>
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <div class="p-4 bg-gray-50 rounded-lg">
+                                <p class="font-medium mb-2">Q: In a math problem, you first:</p>
+                                <div class="space-y-2 text-sm">
+                                    <label class="flex items-center">
+                                        <input type="radio" name="q2" class="mr-2">
+                                        <span>Draw or visualize the problem</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="radio" name="q2" class="mr-2" checked>
+                                        <span>Talk through the problem out loud</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="radio" name="q2" class="mr-2">
+                                        <span>Read and re-read the problem</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="radio" name="q2" class="mr-2">
+                                        <span>Start working with numbers immediately</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h4 class="font-bold text-lg mb-4">AI Analysis Results</h4>
+                        <div class="bg-gradient-to-r from-purple-50 to-blue-50 p-6 rounded-lg">
+                            <div class="flex items-center mb-4">
+                                <div class="ai-animation">
+                                    <i class="fas fa-brain text-purple-600 text-2xl mr-3"></i>
+                                </div>
+                                <span class="font-semibold text-purple-900">AI Processing Complete</span>
+                            </div>
+                            
+                            <div class="space-y-4">
+                                <div>
+                                    <div class="flex justify-between items-center mb-2">
+                                        <span class="font-medium">Auditory Learning</span>
+                                        <span class="text-purple-600 font-bold">85%</span>
+                                    </div>
+                                    <div class="w-full bg-gray-200 rounded-full h-3">
+                                        <div class="bg-purple-600 h-3 rounded-full" style="width: 85%"></div>
+                                    </div>
+                                </div>
+                                
+                                <div>
+                                    <div class="flex justify-between items-center mb-2">
+                                        <span class="font-medium">Visual Learning</span>
+                                        <span class="text-blue-600 font-bold">65%</span>
+                                    </div>
+                                    <div class="w-full bg-gray-200 rounded-full h-3">
+                                        <div class="bg-blue-600 h-3 rounded-full" style="width: 65%"></div>
+                                    </div>
+                                </div>
+                                
+                                <div>
+                                    <div class="flex justify-between items-center mb-2">
+                                        <span class="font-medium">Kinesthetic Learning</span>
+                                        <span class="text-green-600 font-bold">45%</span>
+                                    </div>
+                                    <div class="w-full bg-gray-200 rounded-full h-3">
+                                        <div class="bg-green-600 h-3 rounded-full" style="width: 45%"></div>
+                                    </div>
+                                </div>
+                                
+                                <div>
+                                    <div class="flex justify-between items-center mb-2">
+                                        <span class="font-medium">Reading/Writing</span>
+                                        <span class="text-orange-600 font-bold">40%</span>
+                                    </div>
+                                    <div class="w-full bg-gray-200 rounded-full h-3">
+                                        <div class="bg-orange-600 h-3 rounded-full" style="width: 40%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-6 p-4 bg-white rounded-lg">
+                                <h5 class="font-semibold mb-2">AI Recommendation:</h5>
+                                <p class="text-sm text-gray-700">
+                                    <strong>Primary Style:</strong> Auditory learner - prefers audio explanations, discussions, and verbal instructions.<br>
+                                    <strong>Secondary Style:</strong> Visual elements should be incorporated for optimal learning.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Content Adaptation Demo -->
+            <div id="demo-content-adaptation" class="demo-content bg-white rounded-2xl shadow-xl p-8 hidden">
+                <h3 class="text-2xl font-bold text-center mb-8">AI Content Adaptation</h3>
+                <p class="text-center text-gray-600 mb-8">Same lesson, different formats based on learning style</p>
+                
+                <div class="grid lg:grid-cols-3 gap-6">
+                    <!-- Visual Format -->
+                    <div class="bg-blue-50 p-6 rounded-xl">
+                        <div class="flex items-center mb-4">
+                            <i class="fas fa-eye text-blue-600 text-xl mr-3"></i>
+                            <h4 class="font-bold text-lg">Visual Learner</h4>
+                        </div>
+                        <div class="bg-white p-4 rounded-lg mb-4">
+                            <div class="bg-gray-100 h-32 rounded-lg flex items-center justify-center mb-3">
+                                <i class="fas fa-chart-line text-3xl text-blue-600"></i>
+                            </div>
+                            <h5 class="font-semibold mb-2">Quadratic Functions</h5>
+                            <p class="text-sm text-gray-600">Interactive graphs, visual diagrams, and color-coded examples</p>
+                        </div>
+                        <ul class="text-sm space-y-2">
+                            <li class="flex items-center"><i class="fas fa-check text-blue-600 mr-2"></i>Interactive graphs</li>
+                            <li class="flex items-center"><i class="fas fa-check text-blue-600 mr-2"></i>Step-by-step visual guides</li>
+                            <li class="flex items-center"><i class="fas fa-check text-blue-600 mr-2"></i>Color-coded formulas</li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Auditory Format -->
+                    <div class="bg-green-50 p-6 rounded-xl">
+                        <div class="flex items-center mb-4">
+                            <i class="fas fa-volume-up text-green-600 text-xl mr-3"></i>
+                            <h4 class="font-bold text-lg">Auditory Learner</h4>
+                        </div>
+                        <div class="bg-white p-4 rounded-lg mb-4">
+                            <div class="bg-gray-100 h-32 rounded-lg flex items-center justify-center mb-3">
+                                <i class="fas fa-play-circle text-3xl text-green-600"></i>
+                            </div>
+                            <h5 class="font-semibold mb-2">Quadratic Functions</h5>
+                            <p class="text-sm text-gray-600">Audio explanations, narrated examples, and discussion points</p>
+                        </div>
+                        <ul class="text-sm space-y-2">
+                            <li class="flex items-center"><i class="fas fa-check text-green-600 mr-2"></i>Narrated lessons</li>
+                            <li class="flex items-center"><i class="fas fa-check text-green-600 mr-2"></i>Audio problem solving</li>
+                            <li class="flex items-center"><i class="fas fa-check text-green-600 mr-2"></i>Discussion prompts</li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Text-based Format -->
+                    <div class="bg-purple-50 p-6 rounded-xl">
+                        <div class="flex items-center mb-4">
+                            <i class="fas fa-book text-purple-600 text-xl mr-3"></i>
+                            <h4 class="font-bold text-lg">Reading/Writing</h4>
+                        </div>
+                        <div class="bg-white p-4 rounded-lg mb-4">
+                            <div class="bg-gray-100 h-32 rounded-lg flex items-center justify-center mb-3">
+                                <i class="fas fa-file-alt text-3xl text-purple-600"></i>
+                            </div>
+                            <h5 class="font-semibold mb-2">Quadratic Functions</h5>
+                            <p class="text-sm text-gray-600">Detailed text explanations, written exercises, and note-taking</p>
+                        </div>
+                        <ul class="text-sm space-y-2">
+                            <li class="flex items-center"><i class="fas fa-check text-purple-600 mr-2"></i>Comprehensive text</li>
+                            <li class="flex items-center"><i class="fas fa-check text-purple-600 mr-2"></i>Written examples</li>
+                            <li class="flex items-center"><i class="fas fa-check text-purple-600 mr-2"></i>Note-taking tools</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Difficulty Adjustment Demo -->
+            <div id="demo-difficulty-adjustment" class="demo-content bg-white rounded-2xl shadow-xl p-8 hidden">
+                <h3 class="text-2xl font-bold text-center mb-8">Adaptive Difficulty Adjustment</h3>
+                
+                <div class="grid lg:grid-cols-2 gap-8">
+                    <div>
+                        <h4 class="font-bold text-lg mb-4">Performance Timeline</h4>
+                        <div class="bg-gray-50 p-4 rounded-lg">
+                            <canvas id="performanceChart" style="height: 300px;"></canvas>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h4 class="font-bold text-lg mb-4">AI Adjustment Logic</h4>
+                        <div class="space-y-4">
+                            <div class="p-4 bg-green-50 rounded-lg border-l-4 border-green-500">
+                                <div class="flex items-center mb-2">
+                                    <i class="fas fa-arrow-up text-green-600 mr-2"></i>
+                                    <span class="font-semibold text-green-800">Difficulty Increased</span>
+                                </div>
+                                <p class="text-sm text-green-700">
+                                    Student scored 95% on last 3 questions → Increased complexity level
+                                </p>
+                            </div>
+                            
+                            <div class="p-4 bg-blue-50 rounded-lg border-l-4 border-blue-500">
+                                <div class="flex items-center mb-2">
+                                    <i class="fas fa-equals text-blue-600 mr-2"></i>
+                                    <span class="font-semibold text-blue-800">Difficulty Maintained</span>
+                                </div>
+                                <p class="text-sm text-blue-700">
+                                    Student scores 80-90% → Optimal challenge level maintained
+                                </p>
+                            </div>
+                            
+                            <div class="p-4 bg-orange-50 rounded-lg border-l-4 border-orange-500">
+                                <div class="flex items-center mb-2">
+                                    <i class="fas fa-arrow-down text-orange-600 mr-2"></i>
+                                    <span class="font-semibold text-orange-800">Difficulty Decreased</span>
+                                </div>
+                                <p class="text-sm text-orange-700">
+                                    Student scored below 70% → Reduced complexity, added hints
+                                </p>
+                            </div>
+                            
+                            <div class="p-4 bg-purple-50 rounded-lg border-l-4 border-purple-500">
+                                <div class="flex items-center mb-2">
+                                    <i class="fas fa-lightbulb text-purple-600 mr-2"></i>
+                                    <span class="font-semibold text-purple-800">Learning Style Adaptation</span>
+                                </div>
+                                <p class="text-sm text-purple-700">
+                                    Switched from text to visual format based on engagement metrics
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Real-time Adaptation Example -->
+                <div class="mt-8 bg-gradient-to-r from-blue-50 to-purple-50 p-6 rounded-xl">
+                    <h4 class="font-bold text-lg mb-4 text-center">Real-time Adaptation Example</h4>
+                    <div class="grid md:grid-cols-3 gap-6">
+                        <div class="text-center">
+                            <div class="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                                <i class="fas fa-times text-red-600 text-xl"></i>
+                            </div>
+                            <h5 class="font-semibold mb-2">Student Struggling</h5>
+                            <p class="text-sm text-gray-600">3 incorrect answers in a row</p>
+                        </div>
+                        <div class="text-center">
+                            <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                                <i class="fas fa-cogs text-blue-600 text-xl"></i>
+                            </div>
+                            <h5 class="font-semibold mb-2">AI Intervenes</h5>
+                            <p class="text-sm text-gray-600">Provides hints and simpler examples</p>
+                        </div>
+                        <div class="text-center">
+                            <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                                <i class="fas fa-check text-green-600 text-xl"></i>
+                            </div>
+                            <h5 class="font-semibold mb-2">Improvement</h5>
+                            <p class="text-sm text-gray-600">Student confidence restored</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technology Stack -->
+    <section id="tech-stack" class="py-16 bg-gray-100 section-transition">
+        <div class="max-w-6xl mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center mb-12">Technology Stack</h2>
+            
+            <!-- Stack Overview -->
+            <div class="grid lg:grid-cols-4 gap-8 mb-12">
+                <!-- Frontend -->
+                <div class="bg-white p-6 rounded-xl shadow-lg">
+                    <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-desktop text-blue-600 text-xl"></i>
+                    </div>
+                    <h3 class="font-bold text-lg mb-4">Frontend</h3>
+                    <ul class="space-y-2 text-sm">
+                        <li class="flex items-center">
+                            <i class="fab fa-react text-blue-500 mr-2"></i>
+                            React.js 18+
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-palette text-cyan-500 mr-2"></i>
+                            Tailwind CSS
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-mobile-alt text-purple-500 mr-2"></i>
+                            Progressive Web App
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Backend -->
+                <div class="bg-white p-6 rounded-xl shadow-lg">
+                    <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-server text-green-600 text-xl"></i>
+                    </div>
+                    <h3 class="font-bold text-lg mb-4">Backend</h3>
+                    <ul class="space-y-2 text-sm">
+                        <li class="flex items-center">
+                            <i class="fab fa-node-js text-green-500 mr-2"></i>
+                            Node.js + Express
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-fire text-orange-500 mr-2"></i>
+                            Firebase Functions
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-shield-alt text-red-500 mr-2"></i>
+                            JWT Authentication
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- AI & Analytics -->
+                <div class="bg-white p-6 rounded-xl shadow-lg">
+                    <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-brain text-purple-600 text-xl"></i>
+                    </div>
+                    <h3 class="font-bold text-lg mb-4">AI & Analytics</h3>
+                    <ul class="space-y-2 text-sm">
+                        <li class="flex items-center">
+                            <i class="fas fa-robot text-green-500 mr-2"></i>
+                            OpenAI GPT-4
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-chart-bar text-blue-500 mr-2"></i>
+                            Power BI / Looker
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-cloud text-gray-500 mr-2"></i>
+                            Azure ML Services
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Database & Storage -->
+                <div class="bg-white p-6 rounded-xl shadow-lg">
+                    <div class="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-database text-orange-600 text-xl"></i>
+                    </div>
+                    <h3 class="font-bold text-lg mb-4">Database & Storage</h3>
+                    <ul class="space-y-2 text-sm">
+                        <li class="flex items-center">
+                            <i class="fas fa-fire text-orange-500 mr-2"></i>
+                            Firestore NoSQL
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-cloud text-blue-500 mr-2"></i>
+                            Azure Blob Storage
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-lock text-gray-500 mr-2"></i>
+                            Encrypted at rest
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Implementation Examples -->
+            <div class="bg-white rounded-2xl shadow-xl p-8">
+                <h3 class="text-2xl font-bold text-center mb-8">Implementation Examples</h3>
+                
+                <div class="grid lg:grid-cols-2 gap-8">
+                    <!-- Frontend Code Example -->
+                    <div>
+                        <h4 class="font-bold text-lg mb-4">React Component Example</h4>
+                        <div class="bg-gray-900 text-green-400 p-4 rounded-lg text-sm font-mono overflow-x-auto">
+                            <pre>
+// Adaptive Learning Component
+import React, { useState, useEffect } from 'react';
+import { useAI } from './hooks/useAI';
+
+const AdaptiveLessonPlayer = ({ studentId, lessonId }) => {
+  const [content, setContent] = useState(null);
+  const [learningStyle, setLearningStyle] = useState('visual');
+  const { adaptContent, trackProgress } = useAI();
+
+  useEffect(() => {
+    const loadContent = async () => {
+      const adaptedContent = await adaptContent(
+        lessonId, 
+        learningStyle, 
+        studentId
+      );
+      setContent(adaptedContent);
+    };
+    loadContent();
+  }, [lessonId, learningStyle]);
+
+  const handleInteraction = (interaction) => {
+    trackProgress(studentId, lessonId, interaction);
+  };
+
+  return (
+    &lt;div className="adaptive-lesson-player"&gt;
+      {content && (
+        &lt;ContentRenderer 
+          content={content}
+          onInteraction={handleInteraction}
+        /&gt;
+      )}
+    &lt;/div&gt;
+  );
+};
+                            </pre>
+                        </div>
+                    </div>
+                    
+                    <!-- Backend API Example -->
+                    <div>
+                        <h4 class="font-bold text-lg mb-4">Backend API Example</h4>
+                        <div class="bg-gray-900 text-green-400 p-4 rounded-lg text-sm font-mono overflow-x-auto">
+                            <pre>
+// AI Personalization Service
+const express = require('express');
+const { OpenAI } = require('openai');
+const app = express();
+
+app.post('/api/adapt-content', async (req, res) => {
+  const { lessonId, studentProfile, learningStyle } = req.body;
+  
+  try {
+    // Get base content
+    const baseContent = await getLesson(lessonId);
+    
+    // AI adaptation prompt
+    const prompt = `
+      Adapt this lesson for a ${learningStyle} learner:
+      ${baseContent}
+      
+      Student profile: ${JSON.stringify(studentProfile)}
+      
+      Return adapted content with appropriate format.
+    `;
+    
+    const response = await openai.chat.completions.create({
+      model: "gpt-4",
+      messages: [{ role: "user", content: prompt }]
+    });
+    
+    const adaptedContent = response.choices[0].message.content;
+    
+    // Log adaptation for analytics
+    await logAdaptation(studentProfile.id, lessonId, adaptedContent);
+    
+    res.json({ 
+      success: true, 
+      content: adaptedContent 
+    });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+                            </pre>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Architecture Benefits -->
+                <div class="mt-8 grid md:grid-cols-3 gap-6">
+                    <div class="text-center p-6 bg-blue-50 rounded-xl">
+                        <i class="fas fa-rocket text-blue-600 text-3xl mb-3"></i>
+                        <h4 class="font-bold mb-2">Scalable</h4>
+                        <p class="text-sm text-gray-600">Cloud-native architecture supports thousands of concurrent users</p>
+                    </div>
+                    <div class="text-center p-6 bg-green-50 rounded-xl">
+                        <i class="fas fa-shield-alt text-green-600 text-3xl mb-3"></i>
+                        <h4 class="font-bold mb-2">Secure</h4>
+                        <p class="text-sm text-gray-600">End-to-end encryption and compliance with education data privacy</p>
+                    </div>
+                    <div class="text-center p-6 bg-purple-50 rounded-xl">
+                        <i class="fas fa-sync-alt text-purple-600 text-3xl mb-3"></i>
+                        <h4 class="font-bold mb-2">Real-time</h4>
+                        <p class="text-sm text-gray-600">Instant AI adaptations and live progress tracking</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Prototype Modal -->
+    <div id="prototype-modal" class="prototype-modal fixed inset-0 z-50 hidden">
+        <div class="flex items-center justify-center min-h-screen p-4">
+            <div class="bg-white rounded-2xl shadow-2xl max-w-6xl w-full max-h-screen overflow-hidden">
+                <!-- Prototype Header -->
+                <div class="flex justify-between items-center p-6 border-b">
+                    <div>
+                        <h3 class="text-2xl font-bold">Agent 90 - Live Prototype</h3>
+                        <p class="text-gray-600">Interactive demo with dummy data</p>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <div class="flex space-x-2">
+                            <button onclick="switchRole('student')" class="role-btn px-4 py-2 bg-blue-600 text-white rounded-lg text-sm">
+                                Student
+                            </button>
+                            <button onclick="switchRole('teacher')" class="role-btn px-4 py-2 bg-gray-300 text-gray-700 rounded-lg text-sm">
+                                Teacher
+                            </button>
+                            <button onclick="switchRole('admin')" class="role-btn px-4 py-2 bg-gray-300 text-gray-700 rounded-lg text-sm">
+                                Admin
+                            </button>
+                        </div>
+                        <button onclick="closePrototype()" class="text-gray-500 hover:text-gray-700">
+                            <i class="fas fa-times text-xl"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Prototype Content -->
+                <div class="p-6 overflow-y-auto" style="max-height: 70vh;">
+                    <!-- Student Prototype -->
+                    <div id="prototype-student" class="prototype-role">
+                        <div class="text-center mb-8">
+                            <div class="w-20 h-20 gradient-bg rounded-full flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-user-graduate text-white text-2xl"></i>
+                            </div>
+                            <h4 class="text-xl font-bold">Welcome Back, Alex!</h4>
+                            <p class="text-gray-600">Continue your personalized learning journey</p>
+                        </div>
+                        
+                        <!-- Student Dashboard Simulation -->
+                        <div class="grid md:grid-cols-2 gap-6 mb-8">
+                            <div class="bg-gradient-to-r from-blue-50 to-blue-100 p-6 rounded-xl">
+                                <h5 class="font-bold text-lg mb-4">Today's Progress</h5>
+                                <div class="space-y-3">
+                                    <div class="flex justify-between items-center">
+                                        <span>Mathematics</span>
+                                        <div class="flex items-center">
+                                            <div class="w-24 bg-blue-200 rounded-full h-2 mr-2">
+                                                <div class="bg-blue-600 h-2 rounded-full" style="width: 75%"></div>
+                                            </div>
+                                            <span class="text-sm font-semibold">75%</span>
+                                        </div>
+                                    </div>
+                                    <div class="flex justify-between items-center">
+                                        <span>Science</span>
+                                        <div class="flex items-center">
+                                            <div class="w-24 bg-blue-200 rounded-full h-2 mr-2">
+                                                <div class="bg-blue-600 h-2 rounded-full" style="width: 60%"></div>
+                                            </div>
+                                            <span class="text-sm font-semibold">60%</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="bg-gradient-to-r from-green-50 to-green-100 p-6 rounded-xl">
+                                <h5 class="font-bold text-lg mb-4">AI Recommendations</h5>
+                                <div class="space-y-3">
+                                    <div class="flex items-center p-3 bg-white rounded-lg">
+                                        <i class="fas fa-lightbulb text-yellow-500 mr-3"></i>
+                                        <div>
+                                            <p class="font-medium text-sm">Focus on Algebra</p>
+                                            <p class="text-xs text-gray-600">Based on your recent performance</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center p-3 bg-white rounded-lg">
+                                        <i class="fas fa-clock text-blue-500 mr-3"></i>
+                                        <div>
+                                            <p class="font-medium text-sm">Study Time: 25 min</p>
+                                            <p class="text-xs text-gray-600">Optimal session length for you</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Interactive Lesson Simulation -->
+                        <div class="bg-white border-2 border-gray-200 rounded-xl p-6">
+                            <h5 class="font-bold text-lg mb-4">Current Lesson: Linear Equations</h5>
+                            <div class="mb-4">
+                                <div class="flex items-center mb-3">
+                                    <i class="fas fa-magic text-purple-600 mr-2"></i>
+                                    <span class="text-sm font-medium text-purple-800">AI detected: You prefer visual learning</span>
+                                </div>
+                                <div class="bg-gray-100 h-32 rounded-lg flex items-center justify-center mb-4">
+                                    <div class="text-center">
+                                        <i class="fas fa-chart-line text-3xl text-blue-600 mb-2"></i>
+                                        <p class="text-sm">Interactive Graph: y = 2x + 3</p>
+                                    </div>
+                                </div>
+                                <p class="text-sm text-gray-700 mb-4">
+                                    This linear equation creates a straight line. The coefficient 2 represents the slope...
+                                </p>
+                                <button onclick="simulateQuiz()" class="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition-colors">
+                                    Take Practice Quiz
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Teacher Prototype -->
+                    <div id="prototype-teacher" class="prototype-role hidden">
+                        <div class="text-center mb-8">
+                            <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-chalkboard-teacher text-green-600 text-2xl"></i>
+                            </div>
+                            <h4 class="text-xl font-bold">Teacher Dashboard</h4>
+                            <p class="text-gray-600">Monitor and support your students' progress</p>
+                        </div>
+                        
+                        <!-- Class Analytics -->
+                        <div class="grid md:grid-cols-3 gap-6 mb-8">
+                            <div class="bg-blue-50 p-6 rounded-xl text-center">
+                                <i class="fas fa-users text-blue-600 text-2xl mb-3"></i>
+                                <div class="text-2xl font-bold">28</div>
+                                <div class="text-sm text-gray-600">Active Students</div>
+                            </div>
+                            <div class="bg-green-50 p-6 rounded-xl text-center">
+                                <i class="fas fa-chart-line text-green-600 text-2xl mb-3"></i>
+                                <div class="text-2xl font-bold">87%</div>
+                                <div class="text-sm text-gray-600">Class Average</div>
+                            </div>
+                            <div class="bg-orange-50 p-6 rounded-xl text-center">
+                                <i class="fas fa-exclamation-triangle text-orange-600 text-2xl mb-3"></i>
+                                <div class="text-2xl font-bold">3</div>
+                                <div class="text-sm text-gray-600">At-Risk Students</div>
+                            </div>
+                        </div>
+                        
+                        <!-- Student Progress Chart -->
+                        <div class="bg-white border-2 border-gray-200 rounded-xl p-6 mb-6">
+                            <h5 class="font-bold text-lg mb-4">Class Performance Trends</h5>
+                            <canvas id="teacherChart" style="height: 250px;"></canvas>
+                        </div>
+                        
+                        <!-- Student Alerts -->
+                        <div class="bg-white border-2 border-gray-200 rounded-xl p-6">
+                            <h5 class="font-bold text-lg mb-4">Student Alerts</h5>
+                            <div class="space-y-3">
+                                <div class="flex items-center justify-between p-3 bg-red-50 rounded-lg">
+                                    <div class="flex items-center">
+                                        <i class="fas fa-exclamation-circle text-red-600 mr-3"></i>
+                                        <div>
+                                            <p class="font-medium">Mike Torres - Struggling with Algebra</p>
+                                            <p class="text-sm text-gray-600">3 consecutive low scores</p>
+                                        </div>
+                                    </div>
+                                    <button class="bg-red-600 text-white px-3 py-1 rounded text-sm">Intervene</button>
+                                </div>
+                                <div class="flex items-center justify-between p-3 bg-yellow-50 rounded-lg">
+                                    <div class="flex items-center">
+                                        <i class="fas fa-clock text-yellow-600 mr-3"></i>
+                                        <div>
+                                            <p class="font-medium">Sarah Johnson - Inactive for 2 days</p>
+                                            <p class="text-sm text-gray-600">Last login: Monday</p>
+                                        </div>
+                                    </div>
+                                    <button class="bg-yellow-600 text-white px-3 py-1 rounded text-sm">Contact</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Admin Prototype -->
+                    <div id="prototype-admin" class="prototype-role hidden">
+                        <div class="text-center mb-8">
+                            <div class="w-20 h-20 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-cog text-purple-600 text-2xl"></i>
+                            </div>
+                            <h4 class="text-xl font-bold">Admin Dashboard</h4>
+                            <p class="text-gray-600">System overview and management</p>
+                        </div>
+                        
+                        <!-- System Metrics -->
+                        <div class="grid md:grid-cols-4 gap-4 mb-8">
+                            <div class="bg-blue-50 p-4 rounded-xl text-center">
+                                <i class="fas fa-users text-blue-600 text-xl mb-2"></i>
+                                <div class="text-xl font-bold">1,247</div>
+                                <div class="text-xs text-gray-600">Total Users</div>
+                            </div>
+                            <div class="bg-green-50 p-4 rounded-xl text-center">
+                                <i class="fas fa-school text-green-600 text-xl mb-2"></i>
+                                <div class="text-xl font-bold">15</div>
+                                <div class="text-xs text-gray-600">Schools</div>
+                            </div>
+                            <div class="bg-purple-50 p-4 rounded-xl text-center">
+                                <i class="fas fa-book text-purple-600 text-xl mb-2"></i>
+                                <div class="text-xl font-bold">342</div>
+                                <div class="text-xs text-gray-600">Lessons</div>
+                            </div>
+                            <div class="bg-orange-50 p-4 rounded-xl text-center">
+                                <i class="fas fa-server text-orange-600 text-xl mb-2"></i>
+                                <div class="text-xl font-bold">99.9%</div>
+                                <div class="text-xs text-gray-600">Uptime</div>
+                            </div>
+                        </div>
+                        
+                        <!-- AI Performance Metrics -->
+                        <div class="bg-white border-2 border-gray-200 rounded-xl p-6 mb-6">
+                            <h5 class="font-bold text-lg mb-4">AI Performance Metrics</h5>
+                            <div class="grid md:grid-cols-2 gap-6">
+                                <div>
+                                    <canvas id="aiMetricsChart" style="height: 200px;"></canvas>
+                                </div>
+                                <div class="space-y-4">
+                                    <div class="flex justify-between items-center">
+                                        <span>Personalization Accuracy</span>
+                                        <span class="font-bold text-green-600">94.2%</span>
+                                    </div>
+                                    <div class="flex justify-between items-center">
+                                        <span>Content Adaptation Rate</span>
+                                        <span class="font-bold text-blue-600">847/hr</span>
+                                    </div>
+                                    <div class="flex justify-between items-center">
+                                        <span>Learning Style Detection</span>
+                                        <span class="font-bold text-purple-600">91.8%</span>
+                                    </div>
+                                    <div class="flex justify-between items-center">
+                                        <span>Student Engagement</span>
+                                        <span class="font-bold text-orange-600">+23%</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- System Health -->
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div class="bg-white border-2 border-gray-200 rounded-xl p-6">
+                                <h5 class="font-bold text-lg mb-4">System Health</h5>
+                                <div class="space-y-3">
+                                    <div class="flex justify-between items-center">
+                                        <span>API Response Time</span>
+                                        <span class="bg-green-100 text-green-800 px-2 py-1 rounded text-sm">120ms</span>
+                                    </div>
+                                    <div class="flex justify-between items-center">
+                                        <span>Database Load</span>
+                                        <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded text-sm">45%</span>
+                                    </div>
+                                    <div class="flex justify-between items-center">
+                                        <span>AI Processing Queue</span>
+                                        <span class="bg-yellow-100 text-yellow-800 px-2 py-1 rounded text-sm">23 jobs</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="bg-white border-2 border-gray-200 rounded-xl p-6">
+                                <h5 class="font-bold text-lg mb-4">Recent Activity</h5>
+                                <div class="space-y-3 text-sm">
+                                    <div class="flex items-center">
+                                        <i class="fas fa-plus text-green-600 mr-2"></i>
+                                        <span>New school registered: Lincoln High</span>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <i class="fas fa-upload text-blue-600 mr-2"></i>
+                                        <span>Content update: Mathematics Module 3</span>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <i class="fas fa-chart-line text-purple-600 mr-2"></i>
+                                        <span>AI model performance improved by 2.3%</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        // Navigation functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Intersection Observer for section visibility
+            const sections = document.querySelectorAll('.section-transition');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('section-visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+
+            // Navigation indicator
+            const navLinks = document.querySelectorAll('.nav-link');
+            const indicator = document.querySelector('.nav-indicator');
+            
+            function updateIndicator(activeLink) {
+                const linkRect = activeLink.getBoundingClientRect();
+                const navRect = activeLink.parentElement.getBoundingClientRect();
+                indicator.style.width = linkRect.width + 'px';
+                indicator.style.left = (linkRect.left - navRect.left) + 'px';
+            }
+
+            navLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const targetId = link.getAttribute('href');
+                    const targetSection = document.querySelector(targetId);
+                    targetSection.scrollIntoView({ behavior: 'smooth' });
+                    updateIndicator(link);
+                });
+            });
+
+            // Initialize indicator on first link
+            if (navLinks.length > 0) {
+                updateIndicator(navLinks[0]);
+            }
+
+            // Initialize charts
+            initializeCharts();
+        });
+
+        // Mockup functionality
+        function showMockup(mockupId) {
+            // Hide all mockups
+            document.querySelectorAll('.mockup-content').forEach(content => {
+                content.classList.add('hidden');
+            });
+            
+            // Show selected mockup
+            document.getElementById(`mockup-${mockupId}`).classList.remove('hidden');
+            
+            // Update tabs
+            document.querySelectorAll('.mockup-tab').forEach(tab => {
+                tab.classList.remove('bg-purple-600', 'text-white');
+                tab.classList.add('bg-gray-300', 'text-gray-700');
+            });
+            
+            event.target.classList.remove('bg-gray-300', 'text-gray-700');
+            event.target.classList.add('bg-purple-600', 'text-white');
+        }
+
+        // AI Demo functionality
+        function showDemo(demoId) {
+            // Hide all demos
+            document.querySelectorAll('.demo-content').forEach(content => {
+                content.classList.add('hidden');
+            });
+            
+            // Show selected demo
+            document.getElementById(`demo-${demoId}`).classList.remove('hidden');
+            
+            // Update tabs
+            document.querySelectorAll('.demo-tab').forEach(tab => {
+                tab.classList.remove('bg-purple-600', 'text-white');
+                tab.classList.add('text-gray-700');
+            });
+            
+            event.target.classList.remove('text-gray-700');
+            event.target.classList.add('bg-purple-600', 'text-white');
+        }
+
+        // Prototype functionality
+        function openPrototype() {
+            document.getElementById('prototype-modal').classList.remove('hidden');
+            initializePrototypeCharts();
+        }
+
+        function closePrototype() {
+            document.getElementById('prototype-modal').classList.add('hidden');
+        }
+
+        function switchRole(role) {
+            // Hide all role content
+            document.querySelectorAll('.prototype-role').forEach(content => {
+                content.classList.add('hidden');
+            });
+            
+            // Show selected role
+            document.getElementById(`prototype-${role}`).classList.remove('hidden');
+            
+            // Update role buttons
+            document.querySelectorAll('.role-btn').forEach(btn => {
+                btn.classList.remove('bg-blue-600', 'bg-green-600', 'bg-purple-600', 'text-white');
+                btn.classList.add('bg-gray-300', 'text-gray-700');
+            });
+            
+            // Color code role buttons
+            const colors = {
+                'student': ['bg-blue-600', 'text-white'],
+                'teacher': ['bg-green-600', 'text-white'],
+                'admin': ['bg-purple-600', 'text-white']
+            };
+            
+            event.target.classList.remove('bg-gray-300', 'text-gray-700');
+            event.target.classList.add(...colors[role]);
+            
+            // Reinitialize charts for the new role
+            setTimeout(() => {
+                initializePrototypeCharts();
+            }, 100);
+        }
+
+        function simulateQuiz() {
+            alert('🎯 AI Adaptive Quiz Started!\n\nThe system would now:\n• Present questions based on your learning style\n• Adjust difficulty in real-time\n• Provide personalized feedback\n• Track progress for analytics');
+        }
+
+        // Chart initialization
+        function initializeCharts() {
+            // Performance Chart for AI Demo
+            const performanceCtx = document.getElementById('performanceChart');
+            if (performanceCtx) {
+                new Chart(performanceCtx, {
+                    type: 'line',
+                    data: {
+                        labels: ['Q1', 'Q2', 'Q3', 'Q4', 'Q5', 'Q6', 'Q7', 'Q8', 'Q9', 'Q10'],
+                        datasets: [{
+                            label: 'Student Performance',
+                            data: [60, 70, 65, 95, 90, 95, 100, 85, 90, 95],
+                            borderColor: 'rgb(99, 102, 241)',
+                            backgroundColor: 'rgba(99, 102, 241, 0.1)',
+                            tension: 0.4,
+                            fill: true
+                        }, {
+                            label: 'Difficulty Level',
+                            data: [50, 55, 50, 65, 65, 70, 75, 70, 75, 80],
+                            borderColor: 'rgb(239, 68, 68)',
+                            backgroundColor: 'rgba(239, 68, 68, 0.1)',
+                            tension: 0.4,
+                            fill: false
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                position: 'top',
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                max: 100
+                            }
+                        }
+                    }
+                });
+            }
+        }
+
+        function initializePrototypeCharts() {
+            // Teacher Chart
+            const teacherCtx = document.getElementById('teacherChart');
+            if (teacherCtx && !teacherCtx.classList.contains('chart-initialized')) {
+                teacherCtx.classList.add('chart-initialized');
+                new Chart(teacherCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4'],
+                        datasets: [{
+                            label: 'Class Average',
+                            data: [78, 82, 85, 87],
+                            backgroundColor: 'rgba(59, 130, 246, 0.8)',
+                            borderColor: 'rgb(59, 130, 246)',
+                            borderWidth: 1
+                        }, {
+                            label: 'Engagement Score',
+                            data: [72, 75, 80, 85],
+                            backgroundColor: 'rgba(16, 185, 129, 0.8)',
+                            borderColor: 'rgb(16, 185, 129)',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                position: 'top',
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                max: 100
+                            }
+                        }
+                    }
+                });
+            }
+
+            // AI Metrics Chart
+            const aiMetricsCtx = document.getElementById('aiMetricsChart');
+            if (aiMetricsCtx && !aiMetricsCtx.classList.contains('chart-initialized')) {
+                aiMetricsCtx.classList.add('chart-initialized');
+                new Chart(aiMetricsCtx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Successful Adaptations', 'Pending', 'Failed'],
+                        datasets: [{
+                            data: [85, 12, 3],
+                            backgroundColor: [
+                                'rgba(16, 185, 129, 0.8)',
+                                'rgba(245, 158, 11, 0.8)',
+                                'rgba(239, 68, 68, 0.8)'
+                            ],
+                            borderColor: [
+                                'rgb(16, 185, 129)',
+                                'rgb(245, 158, 11)',
+                                'rgb(239, 68, 68)'
+                            ],
+                            borderWidth: 2
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                position: 'bottom',
+                            }
+                        }
+                    }
+                });
+            }
+        }
+
+        // Close modal when clicking outside
+        document.getElementById('prototype-modal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closePrototype();
+            }
+        });
+    </script>
+</body>
+</html>
